@@ -125,14 +125,15 @@ return {
                     { section = "header" },
                     { section = "keys", gap = 1, padding = 1 },
                     { section = "startup" },
-                    {
-                        section = "terminal",
-                        cmd = "ascii-image-converter ~/Desktop/Others/profiles.JPG -C -c",
-                        random = 15,
-                        pane = 2,
-                        indent = 15,
-                        height = 20,
-                    },
+                    -- NOTE: Uncomment and customize this section with your own image path
+                    -- {
+                    --     section = "terminal",
+                    --     cmd = "ascii-image-converter ~/path/to/your/image.jpg -C -c",
+                    --     random = 15,
+                    --     pane = 2,
+                    --     indent = 15,
+                    --     height = 20,
+                    -- },
                 },
             },
         },

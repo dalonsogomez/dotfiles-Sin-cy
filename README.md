@@ -1,6 +1,11 @@
 # My dotfiles
 This directory contains the dotfiles for my mac system which probably won't work on yours.
 
+> **Note**: Este repositorio ahora soporta tanto Macs con Apple Silicon (M1/M2/M3) como Macs con Intel.
+> El script de instalación detectará automáticamente tu arquitectura y configurará las rutas correctas de Homebrew:
+> - **Apple Silicon**: `/opt/homebrew`
+> - **Intel Mac**: `/usr/local`
+
 # Install with Script
 
 Run the following
@@ -9,7 +14,7 @@ Run the following
         - `sudo /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
     - `brew install git`
-    - `git clone https://github.com/Sin-cy/dotfiles.git $HOME/dotfiles` this repo into $HOME
+    - `git clone https://github.com/dalonsogomez/dotfiles.git $HOME/dotfiles` this repo into $HOME
     - `cd dotfiles` and make install.sh executable `chmod +x ~/dotfiles/install.sh`
     which ever way possible
     - run in shell `/bin/bash ~/dotfiles/install.sh` 
@@ -36,8 +41,9 @@ zsh-syntax-highlighting git starship tmux nvm`
 
 #### coreutils
 - `brew install coreutils`
-- add `PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"` to top of the rc
-  file (~/.zshrc or ~/.zshenv)
+- El script de instalación detectará automáticamente la ruta correcta para tu arquitectura:
+  - Apple Silicon: `PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"`
+  - Intel Mac: `PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"`
 
 #### fzf-git
 - `git clone https://github.com/junegunn/fzf-git.sh.git`
@@ -57,7 +63,9 @@ Tmux plugins manager
 
 ##### Install Git with Homebrew ( My Default ) 
 - Manually Install git with Homebrew `brew install git`
-- brew installs git on mac at `/opt/homebrew/bin/git`
+- brew installs git on mac at:
+  - Apple Silicon: `/opt/homebrew/bin/git`
+  - Intel Mac: `/usr/local/bin/git`
 
 ##### Install Git via Xcode
 -   Install Xcode usign `xcode-select --install`
@@ -75,7 +83,7 @@ brew install stow
 First, check out dotfiles repo in your $HOME directory using git
 
 ```
-$ git clone https://github.com/Sin-cy/dotfiles.git
+$ git clone https://github.com/dalonsogomez/dotfiles.git
 $ cd dotfiles
 ```
 #### Before Running any stow commands
