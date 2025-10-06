@@ -1,10 +1,17 @@
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Detect Mac architecture and set Homebrew path
+if [[ "$(uname -m)" == "arm64" ]]; then
+    HOMEBREW_PREFIX="/opt/homebrew"
+else
+    HOMEBREW_PREFIX="/usr/local"
+fi
+
+eval "$($HOMEBREW_PREFIX/bin/brew shellenv)"
 
 export LANG=en_US.UTF-8
 
 #------------All PATHS------------
 # GNU coreutils
-export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 
 # Add local ~/scripts to the PATH
 export PATH="$HOME/scripts:$PATH"
@@ -44,15 +51,15 @@ export FZF_TMUX_OPTS=" -p90%,70% "
 
 # NVM 
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # Console Ninja
 export PATH=~/.console-ninja/.bin:$PATH
 
 # bun
 # bun completions
-[ -s "/Users/personal/.bun/_bun" ] && source "/Users/personal/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 

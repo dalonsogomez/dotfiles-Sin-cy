@@ -1,6 +1,15 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 # echo source ~/.bash_profile
 
+# Detect Mac architecture and set Homebrew path (if not already set in .zprofile)
+if [[ -z "$HOMEBREW_PREFIX" ]]; then
+    if [[ "$(uname -m)" == "arm64" ]]; then
+        HOMEBREW_PREFIX="/opt/homebrew"
+    else
+        HOMEBREW_PREFIX="/usr/local"
+    fi
+fi
+
 eval "$(brew shellenv)"
 # source .zprofile in all zsh shells (just in case)
 # [[ -f "$HOME/.zprofile" ]] && source "$HOME/.zprofile"
@@ -114,8 +123,9 @@ alias mpds="mpd ~/.config/mpd/mpd.conf"
 alias sethvault="cd ~/Library/Mobile\ Documents/iCloud~md~obsidian/Documents/sethVault/"
 # ---------------------------------------
 
-# brew installations activation (new mac systems brew path: opt/homebrew , not usr/local )
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# brew installations activation (use detected HOMEBREW_PREFIX)
+source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-. "/Users/personal/.deno/env"
+# Deno environment (if exists)
+[ -f "$HOME/.deno/env" ] && . "$HOME/.deno/env"

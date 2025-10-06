@@ -2,6 +2,21 @@ local wezterm = require("wezterm")
 -- local sessionizer = require("lua.sessionizer")
 local config = wezterm.config_builder()
 
+-- Detect Mac architecture and set Homebrew path
+local function get_homebrew_prefix()
+    local handle = io.popen("uname -m")
+    local arch = handle:read("*a"):gsub("%s+", "")
+    handle:close()
+    
+    if arch == "arm64" then
+        return "/opt/homebrew"
+    else
+        return "/usr/local"
+    end
+end
+
+local HOMEBREW_PREFIX = get_homebrew_prefix()
+
 -- appearance
 config.font = wezterm.font("JetBrainsMonoNL Nerd Font")
 config.font_size = 17
@@ -61,7 +76,7 @@ config.keys = {
             spawn = {
                 cwd = "~/Desktop/main-cs",
                 args = {
-                    "/opt/homebrew/bin/nvim",
+                    HOMEBREW_PREFIX .. "/bin/nvim",
                     "~/Desktop/main-cs",
                     "-c",
                     "lua vim.api.nvim_set_current_dir(\"~/Desktop/main-cs\")"

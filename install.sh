@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Detect Mac architecture and set Homebrew path
+if [[ "$(uname -m)" == "arm64" ]]; then
+    HOMEBREW_PREFIX="/opt/homebrew"
+    echo "Apple Silicon detected - using $HOMEBREW_PREFIX"
+else
+    HOMEBREW_PREFIX="/usr/local"
+    echo "Intel Mac detected - using $HOMEBREW_PREFIX"
+fi
+
 # Install xCode cli tools
 if [[ "$(uname)" == "Darwin" ]]; then
     echo "macOS deteted..."
@@ -92,11 +101,11 @@ echo "Installation complete..."
 # Clone dotfiles repository
 if [ ! -d "$HOME/dotfiles" ]; then
   echo "Cloning dotfiles repository..."
-  git clone https://github.com/Sin-cy/dotfiles.git $HOME/dotfiles
+  git clone https://github.com/dalonsogomez/dotfiles.git $HOME/dotfiles
 fi
 
-# export gnu coreutils to path
-echo 'export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"' >> ~/.zshrc
+# export gnu coreutils to path (using detected HOMEBREW_PREFIX)
+echo "export PATH=\"$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:\$PATH\"" >> ~/.zshrc
 
 # Navigate to dotfiles directory
 cd $HOME/dotfiles || exit
