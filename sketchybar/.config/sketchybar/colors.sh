@@ -3,8 +3,8 @@
 export PURE_WHITE=0xffffffff
 export PURE_BLACK=0xff000000
 
-export BAR_COLOR=0x40000000
-export ITEM_BG_COLOR=0x33000000
+export BAR_COLOR=0xb30b0e14
+export ITEM_BG_COLOR=0xa0171c24
 export ACCENT_COLOR=0x33ffffff
 
 ### Catppuccin
